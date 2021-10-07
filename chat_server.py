@@ -42,7 +42,8 @@ class ChatServer(object):
         return '@'.join((name, host))
 
     def run(self):
-        inputs = [self.server, sys.stdin]
+        # inputs = [self.server, sys.stdin]
+        inputs = [self.server]
         self.outputs = []
         running = True
         while running:
@@ -74,14 +75,14 @@ class ChatServer(object):
                         send(output, msg)
                     self.outputs.append(client)
 
-                elif sock == sys.stdin:
-                    # didn't test sys.stdin on windows system
-                    # handle standard input
-                    cmd = sys.stdin.readline().strip()
-                    if cmd == 'list':
-                        print(self.clientmap.values())
-                    elif cmd == 'quit':
-                        running = False
+                # elif sock == sys.stdin:
+                #     # didn't test sys.stdin on windows system
+                #     # handle standard input
+                #     cmd = sys.stdin.readline().strip()
+                #     if cmd == 'list':
+                #         print(self.clientmap.values())
+                #     elif cmd == 'quit':
+                #         running = False
                 else:
                     # handle all other sockets
                     try:
